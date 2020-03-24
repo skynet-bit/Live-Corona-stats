@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='css/_bootstrap.min.css' />
+    <script src='js/_jquery.min.js'></script>
+    <script src='js/_bootstrap.min.js'></script>
+    <script src='js/_flowtype.js'></script>
+    <link rel='stylesheet' href='css/_main_v1.1.css' >
+<style>
+
+#panelHeading{
+  color:brown;
+}
+#panelBody{
+  box-shadow: inset 0 2px 2px -2px rgba(0,0,0,0.4);
+}
+.innerpb{
+	display: inline-block;
+	width: auto;
+	margin: 5px;
+}
+.innerpb:hover{
+	transform: scale(1.2);
+	-webkit-transform: scale(1.2);
+}
+#customval{
+	border:0;
+	
+	width: auto;
+
+}
+.custom{
+	width: auto;
+	margin:5px;
+}
+#timer{
+	opacity: 0;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+@media only screen and (max-width: 600px) {
+  #hint{
+    font-size:16px;
+  }
+}
+</style>    
+</head>
+<body id='mainBody'>
+
+  <!--<div class="se-pre-con"></div> -->
+  <span style='display: none' id='country'>india</span>
+ 
+  <div id='wrapper'>
+      <center id='wrapperInner'>
+          <div class='panel-group'>
+              <div class="panel panel-primary">
+                  <div class='panel-body font_11' id='panelHeading'>Corona Update</div>
+                  <div class="panel-body font_9" id="panelBody"></div>
+                  <div class="panel-body font_9" id="panelFooter"></div>
+                
+              </div>
+          </div>
+      </center>
+  </div>
+ 
+  <script src='js/_jquery.ui.min.js'></script>
+  <script src='js/_jquery.imgexplosion.js'></script>
+  <script src='js/_instructions_v2.4.js'></script>
+  <script src='js/_justify-multiple-images_v1.1.js'></script>
+<script>
+        $(window).on('load', function(){
+            $('.se-pre-con').fadeOut('slow',function(){$(this).remove();}); 
+            var windowWidth = $(window).width();
+            var windowHeight = $(window).height();
+            $("#wrapper").css({"height": windowHeight-50+"px"});
+            $("#panelFooter").slideUp("fast")
+            $('body').flowtype({
+               minimum   : 500,
+               maximum   : 1200,
+               minFont   : 12,
+               maxFont   : 40,
+               fontRatio : 20
+            });
+
+            var lightColors = panelColors;
+            var lightColor = Object.keys(lightColors);
+            lightColor = getRandom(lightColor, 6);
+             $('#panelBody').css({"height":windowHeight-100+"px"})
+            $('#panelHeading').css({"background-color": lightColors[lightColor[1]]});
+            $('#panelBody').css({"background-color": lightColors[lightColor[2]]});
+
+           
+
+			  body_setup();
+			  $(".innerpb").click(function(){
+			  	get_data(this.id);
+			  })
+
+
+
+			  $(".button_3d_1").click(function(){
+			  	var cus_code=document.getElementById("customval").value;
+			  	
+			  	get_data(cus_code);
+			  })
+
+
+});
+
+        function body_setup(){
+        $("#panelBody").html("<div class='panel panel-primary innerpb' id='india'><div class='panel-body font_1'>India</div></div>");
+        $("#panelBody").append("<div class='panel panel-primary innerpb' id='italy'><div class='panel-body font_2'>Italy</div></div>");
+        $("#panelBody").append("<div class='panel panel-primary innerpb' id='canada'><div class='panel-body font_3'>Canada</div></div>");
+        $("#panelBody").append("<div class='panel panel-primary innerpb' id='iran'><div class='panel-body font_4'>Iran</div></div>");
+        $("#panelBody").append("<div class='panel panel-primary innerpb' id='china'><div class='panel-body font_5'>China</div></div>");
+        $("#panelBody").append("<div class='panel panel-primary innerpb' id='australia'><div class='panel-body font_14'>Australia</div></div>");
+        $("#panelBody").append("<div class='panel panel-primary innerpb' id='pakistan'><div class='panel-body font_3'>Pakistan</div></div>");
+        $("#panelBody").append("<div class='panel panel-primary innerpb' id='usa'><div class='panel-body font_1'>USA</div></div>");
+        $("#panelBody").append("<div class='panel panel-primary innerpb' id='russia'><div class='panel-body font_6'>Russia</div></div>");
+        $("#panelBody").append("<div class='panel panel-primary innerpb' id='england'><div class='panel-body font_2'>England</div></div>");
+        $("#panelBody").append("<div class='panel panel-primary innerpb' id='israel'><div class='panel-body font_9'>Israel</div></div>");
+         $("#panelBody").append("<div class='panel panel-primary custom' id='israel'><input type='text' id='customval' placeholder='Enter Other Countries' autofocus></div>");
+           $("#panelBody").append("<div class='button_3d_1'>Submit</div>")
+    //$("#custom").resizeText();
+        $("#panelBody").css("height","auto")
+        }
+
+
+
+
+
+
+
+        function get_data(count_code){
+        	
+          fetch('https://corona.lmao.ninja/countries/'+count_code)
+ 			 .then(response => {
+  				  return response.json()
+  				})
+  			.then(data => {
+    
+   				 show_data(data, count_code)
+ 				 })
+			  .catch(err => {
+  					console.log("No data found")
+			  })
+        }
+
+
+        function show_data(data, count_code)
+        {
+        	$("#panelFooter").html("<table><tr><th>"+data.country+"</th></tr><tr><td>Total Cases</td> <td>"+data.cases+"</td> </tr><tr> <td>Total Deaths</td> <td>"+data.deaths+"</td> </tr><tr> <td>Active</td> <td>"+data.active+"</td> </tr><tr> <td>Recovered</td> <td>"+data.recovered+"</td> </tr><tr> <td>Critical</td> <td>"+data.critical+"</td> </tr> </table>");
+        	$("#panelFooter").slideDown("slow");
+        	$('html, body').animate({
+        scrollTop: $("#panelFooter").offset().top
+    }, 2000);
+
+        }
+
+        function pageScroll() {
+    window.scrollBy(0,1);
+    scrolldelay = setTimeout(pageScroll,10);
+}
+
+
+
+
+/*
+          <tr> <td>'Today Cases'</td> <td>"+data.todayCases+"</td> </tr> <tr> <td>'Total deaths'</td> <td>"+data.todayDeaths+"</td> </tr> <tr> <td>'Active'</td> <td>"+data.active+"</td> </tr> <tr> <td>'Recovered'</td> <td>"+data.recovered+"</td> </tr> <tr> <td>'Critical'</td> <td>"+data.critical+"</td> </tr>*/
+       
+</script>
+</body>
+</html>
