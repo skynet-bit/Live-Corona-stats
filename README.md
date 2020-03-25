@@ -1,4 +1,4 @@
 # Live Corona stats
  Webpage to track statistics of corona affected
 
-https://skynet-bit.github.io/
+https://skynet-aravindh.info
