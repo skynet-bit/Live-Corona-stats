@@ -1,193 +1,144 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en">
-<head>
-   <!-- Author S Aravindh Akshay-->
-    <title>Corona Updates</title>
-        <meta name="description" content="">
-    <meta name="author" content="">
-
-     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel='stylesheet' href='css/_bootstrap.min.css' />
-    <script src='js/_jquery.min.js'></script>
-    <script src='js/_bootstrap.min.js'></script>
-    <script src='js/_flowtype.js'></script>
-    <link rel='stylesheet' href='css/_main_v1.1.css' >
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+</style>
+<body class="w3-light-grey">
 
-#panelHeading{
-  color:brown;
-}
-#panelBody{
-  box-shadow: inset 0 2px 2px -2px rgba(0,0,0,0.4);
-}
-.innerpb{
-	display: inline-block;
-	width: auto;
-	margin: 5px;
-}
-.innerpb:hover{
-	transform: scale(1.2);
-	-webkit-transform: scale(1.2);
-}
-#customval{
-	border:0;
-	
-	width: auto;
+<!-- Page Container -->
+<div class="w3-content w3-margin-top" style="max-width:1400px;">
 
-}
-.custom{
-	width: auto;
-	margin:5px;
-}
-#timer{
-	opacity: 0;
-}
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-@media only screen and (max-width: 600px) {
-  #hint{
-    font-size:16px;
-  }
-}
-</style>    
-</head>
-<body id='mainBody'>
-
-  <!--<div class="se-pre-con"></div> -->
-  <span style='display: none' id='country'>india</span>
- 
-  <div id='wrapper'>
-      <center id='wrapperInner'>
-          <div class='panel-group'>
-              <div class="panel panel-primary">
-                  <div class='panel-body font_11' id='panelHeading'>Corona Update</div>
-                  <div class="panel-body font_9" id="panelBody"></div>
-                  <div class="panel-body font_9" id="panelFooter"></div>
-                
-              </div>
-          </div>
-      </center>
-  </div>
- 
-  <script src='js/_jquery.ui.min.js'></script>
-  <script src='js/_jquery.imgexplosion.js'></script>
-  <script src='js/_instructions_v2.4.js'></script>
-  <script src='js/_justify-multiple-images_v1.1.js'></script>
-<script>
-        $(window).on('load', function(){
-            $('.se-pre-con').fadeOut('slow',function(){$(this).remove();}); 
-            var windowWidth = $(window).width();
-            var windowHeight = $(window).height();
-            $("#wrapper").css({"height": windowHeight-50+"px"});
-            $("#panelFooter").slideUp("fast")
-            $('body').flowtype({
-               minimum   : 500,
-               maximum   : 1200,
-               minFont   : 12,
-               maxFont   : 40,
-               fontRatio : 20
-            });
-
-            var lightColors = panelColors;
-            var lightColor = Object.keys(lightColors);
-            lightColor = getRandom(lightColor, 6);
-             $('#panelBody').css({"height":windowHeight-100+"px"})
-            $('#panelHeading').css({"background-color": lightColors[lightColor[1]]});
-            $('#panelBody').css({"background-color": lightColors[lightColor[2]]});
-
-           
-
-			  body_setup();
-			  $(".innerpb").click(function(){
-			  	get_data(this.id);
-			  })
-
-
-
-			  $(".button_3d_1").click(function(){
-			  	var cus_code=document.getElementById("customval").value;
-			  	
-			  	get_data(cus_code);
-			  })
-
-
-});
-
-        function body_setup(){
-        $("#panelBody").html("<div class='panel panel-primary innerpb' id='india'><div class='panel-body font_1'>India</div></div>");
-        $("#panelBody").append("<div class='panel panel-primary innerpb' id='italy'><div class='panel-body font_2'>Italy</div></div>");
-        $("#panelBody").append("<div class='panel panel-primary innerpb' id='canada'><div class='panel-body font_3'>Canada</div></div>");
-        $("#panelBody").append("<div class='panel panel-primary innerpb' id='iran'><div class='panel-body font_4'>Iran</div></div>");
-        $("#panelBody").append("<div class='panel panel-primary innerpb' id='china'><div class='panel-body font_5'>China</div></div>");
-        $("#panelBody").append("<div class='panel panel-primary innerpb' id='australia'><div class='panel-body font_14'>Australia</div></div>");
-        $("#panelBody").append("<div class='panel panel-primary innerpb' id='pakistan'><div class='panel-body font_3'>Pakistan</div></div>");
-        $("#panelBody").append("<div class='panel panel-primary innerpb' id='usa'><div class='panel-body font_1'>USA</div></div>");
-        $("#panelBody").append("<div class='panel panel-primary innerpb' id='russia'><div class='panel-body font_6'>Russia</div></div>");
-        $("#panelBody").append("<div class='panel panel-primary innerpb' id='england'><div class='panel-body font_2'>England</div></div>");
-        $("#panelBody").append("<div class='panel panel-primary innerpb' id='israel'><div class='panel-body font_9'>Israel</div></div>");
-         $("#panelBody").append("<div class='panel panel-primary custom' id='israel'><input type='text' id='customval' placeholder='Enter Other Countries' autofocus></div>");
-           $("#panelBody").append("<div class='button_3d_1'>Submit</div>")
-    //$("#custom").resizeText();
-        $("#panelBody").css("height","auto")
-        }
-
-
-
-
-
-
-
-        function get_data(count_code){
-        	
-          fetch('https://corona.lmao.ninja/countries/'+count_code)
- 			 .then(response => {
-  				  return response.json()
-  				})
-  			.then(data => {
+  <!-- The Grid -->
+  <div class="w3-row-padding">
+  
+    <!-- Left Column -->
+    <div class="w3-third">
     
-   				 show_data(data, count_code)
- 				 })
-			  .catch(err => {
-  					console.log("No data found")
-			  })
-        }
+      <div class="w3-white w3-text-grey w3-card-4">
+        <div class="w3-display-container">
+          <img src="/Myimg.jpg" style="width:100%" alt="Avatar">
+          <div class="w3-display-bottomleft w3-container w3-text-black">
+            <h2>S Aravindh Akshay</h2>
+          </div>
+        </div>
+        <div class="w3-container">
+          <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>UI UX Developer, Frontend Developer</p>
+          <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>Hyderabad</p>
+          <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>aravindhakshay97@gmail.com</p>
+          <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>+919573467126</p>
+          <hr>
 
+          <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Skills</b></p>
+          <p>HTML, CSS, JavaScrip, jQuery, Bootstrap</p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:90%">90%</div>
+          </div>
+          <p>AngularJS, NodeJs, Typescript</p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:85%">
+              <div class="w3-center w3-text-white">85%</div>
+            </div>
+          </div>
+          <p>Adobe- XD, Photoshop, Illustrator, Dreamweaver</p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:80%">80%</div>
+          </div>
+          <p>Unity3d, WebGL, BabylonJs,ThreeJs, </p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:80%">80%</div>
+          </div>
+          <br>
 
-        function show_data(data, count_code)
-        {
-        	$("#panelFooter").html("<table><tr><th>"+data.country+"</th></tr><tr><td>Total Cases</td> <td>"+data.cases+"</td> </tr><tr> <td>Total Deaths</td> <td>"+data.deaths+"</td> </tr><tr> <td>Active</td> <td>"+data.active+"</td> </tr><tr> <td>Recovered</td> <td>"+data.recovered+"</td> </tr><tr> <td>Critical</td> <td>"+data.critical+"</td> </tr> </table>");
-        	$("#panelFooter").slideDown("slow");
-        	$('html, body').animate({
-        scrollTop: $("#panelFooter").offset().top
-    }, 2000);
+          <p class="w3-large w3-text-theme"><b><i class="fa fa-globe fa-fw w3-margin-right w3-text-teal"></i>Languages</b></p>
+          <p>English</p>
+          <div class="w3-light-grey w3-round-xlarge">
+            <div class="w3-round-xlarge w3-teal" style="height:24px;width:100%"></div>
+          </div>
+          <p>Spanish</p>
+          <div class="w3-light-grey w3-round-xlarge">
+            <div class="w3-round-xlarge w3-teal" style="height:24px;width:55%"></div>
+          </div>
+          <p>German</p>
+          <div class="w3-light-grey w3-round-xlarge">
+            <div class="w3-round-xlarge w3-teal" style="height:24px;width:25%"></div>
+          </div>
+          <br>
+        </div>
+      </div><br>
 
-        }
+    <!-- End Left Column -->
+    </div>
 
-        function pageScroll() {
-    window.scrollBy(0,1);
-    scrolldelay = setTimeout(pageScroll,10);
-}
+    <!-- Right Column -->
+    <div class="w3-twothird">
+    
+      <div class="w3-container w3-card w3-white w3-margin-bottom">
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Work Experience</h2>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>Front End Developer / w3schools.com</b></h5>
+          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Jan 2015 - <span class="w3-tag w3-teal w3-round">Current</span></h6>
+          <p>Lorem ipsum dolor sit amet. Praesentium magnam consectetur vel in deserunt aspernatur est reprehenderit sunt hic. Nulla tempora soluta ea et odio, unde doloremque repellendus iure, iste.</p>
+          <hr>
+        </div>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>Web Developer / something.com</b></h5>
+          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Mar 2012 - Dec 2014</h6>
+          <p>Consectetur adipisicing elit. Praesentium magnam consectetur vel in deserunt aspernatur est reprehenderit sunt hic. Nulla tempora soluta ea et odio, unde doloremque repellendus iure, iste.</p>
+          <hr>
+        </div>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>Graphic Designer / designsomething.com</b></h5>
+          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Jun 2010 - Mar 2012</h6>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p><br>
+        </div>
+      </div>
 
+      <div class="w3-container w3-card w3-white">
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Education</h2>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>W3Schools.com</b></h5>
+          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Forever</h6>
+          <p>Web Development! All I need to know in one place</p>
+          <hr>
+        </div>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>London Business School</b></h5>
+          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2013 - 2015</h6>
+          <p>Master Degree</p>
+          <hr>
+        </div>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>School of Coding</b></h5>
+          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2010 - 2013</h6>
+          <p>Bachelor Degree</p><br>
+        </div>
+      </div>
 
+    <!-- End Right Column -->
+    </div>
+    
+  <!-- End Grid -->
+  </div>
+  
+  <!-- End Page Container -->
+</div>
 
+<footer class="w3-container w3-teal w3-center w3-margin-top">
+  <p>Find me on social media.</p>
+  <i class="fa fa-facebook-official w3-hover-opacity"></i>
+  <i class="fa fa-instagram w3-hover-opacity"></i>
+  <i class="fa fa-snapchat w3-hover-opacity"></i>
+  <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+  <i class="fa fa-twitter w3-hover-opacity"></i>
+  <i class="fa fa-linkedin w3-hover-opacity"></i>
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+</footer>
 
-/*
-          <tr> <td>'Today Cases'</td> <td>"+data.todayCases+"</td> </tr> <tr> <td>'Total deaths'</td> <td>"+data.todayDeaths+"</td> </tr> <tr> <td>'Active'</td> <td>"+data.active+"</td> </tr> <tr> <td>'Recovered'</td> <td>"+data.recovered+"</td> </tr> <tr> <td>'Critical'</td> <td>"+data.critical+"</td> </tr>*/
-       
-</script>
 </body>
 </html>
